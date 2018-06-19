@@ -10,10 +10,10 @@ public class Authores {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    private int author_id;
 
-    String name;
-    String nationality;
+    private String name;
+    private String nationality;
 
     @ManyToMany(mappedBy = "authors",cascade = CascadeType.ALL)
     private List<Book> books=new ArrayList<>();
@@ -21,7 +21,7 @@ public class Authores {
 
 
     public int getId() {
-        return id;
+        return author_id;
     }
 
     public String getName() {
@@ -33,7 +33,7 @@ public class Authores {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.author_id = id;
     }
 
     public void setName(String name) {

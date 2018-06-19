@@ -12,7 +12,7 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int genre_id;
-    String name;
+    private String name;
 
     @ManyToMany(mappedBy = "genres",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Book> books=new ArrayList<>();

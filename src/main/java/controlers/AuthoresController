@@ -14,11 +14,16 @@ public class AuthoresController {
 @Autowired
     AuthoresRepository myAuthoreRepository;
 
-@RequestMapping(value = "/authores",method = RequestMethod.POST)
-    public void addBook(@RequestParam(value = "name",defaultValue = "Bacovia") String name)
-{
-    Authores myAuthore=new Authores();
-    myAuthoreRepository.save(myAuthore);
-}
+@RequestMapping(value = "/autor",method = RequestMethod.POST)
+    public void addAuthors(@RequestBody Authors myAuthor)
+    {
+      myAuthorsRepository.save(myAuthor);
+    }
+
+    @RequestMapping(value = "/author",method = RequestMethod.GET)
+    public List<Authors> getAuthor()
+    {
+        return (List<Authors>) myAuthorsRepository.findAll();
+    }
 
 }

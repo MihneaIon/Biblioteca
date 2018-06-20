@@ -15,10 +15,10 @@ public class BookController
     BookRepository myBoookRepositiory;
 
     @RequestMapping(value = "/book", method = RequestMethod.POST)
-    public void addBook(@RequestParam(value = "name", defaultValue = "Alice in tara minunilor")String name)
+    public void addBook(@RequestBody Book book)
     {
-        Book myBook=new Book(name);
-        myBoookRepositiory.save(myBook);
+
+        myBoookRepositiory.save(book);
 
     }
 }

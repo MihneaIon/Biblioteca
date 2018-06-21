@@ -25,21 +25,5 @@ public class AuthoresController {
     {
         return (List<Authors>) myAuthorsRepository.findAll();
     }
-
-    
-//    @RequestMapping(value = "/book{book_id}",method = RequestMethod.PUT)
-//    public Book updateBook(@PathVariable(value = "book_id")Long bookId,
-//                           @Valid @RequestBody Book myBook)
-//    {
-//        Book auxBook=(Book)myBoookRepositiory.findById(bookId);
-//    }
-//
-//    @DeleteMapping("/book/{book_id}")
-//    public ResponseEntity<?> deleteBook(@PathVariable(value = "id")
-//                                        Long bookId)
-//    {
-//        Book myBook= myBoookRepositiory.findById(bookId);
-//    }
-    
-
+   
 }

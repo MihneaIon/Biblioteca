@@ -3,27 +3,62 @@ package com.siemens.Library.library.controler;
 import com.siemens.Library.library.Authores;
 import com.siemens.Library.library.repository.AuthoresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class AuthoresController {
 
 @Autowired
     AuthoresRepository myAuthoreRepository;
-
-@RequestMapping(value = "/autor",method = RequestMethod.POST)
-    public void addAuthors(@RequestBody Authors myAuthor)
+    @RequestMapping(value = "/autor",method = RequestMethod.POST)
+    public void addAuthors(@RequestBody Authores myAuthor)
     {
-      myAuthorsRepository.save(myAuthor);
+        myAuthoreRepository.save(myAuthor);
     }
 
-    @RequestMapping(value = "/author",method = RequestMethod.GET)
-    public List<Authors> getAuthor()
+    @RequestMapping(value = "/autor",method = RequestMethod.GET)
+    public List<Authores> getAuthor()
     {
-        return (List<Authors>) myAuthorsRepository.findAll();
+
+        return (List<Authores>) myAuthoreRepository.findAll();
     }
-   
+
+    @RequestMapping(value = "/autor/{authore_id}",method = RequestMethod.PUT)
+    public Authores updateAutor(@PathVariable(value = "authore_id")Long authorId,
+                                @Valid @RequestBody Authores myAuthor)
+    {
+        try{
+
+            Authores auxAuthores=myAuthoreRepository.findById(authorId).get();
+            auxAuthores.setName(myAuthor.getName());
+            auxAuthores.setNationality(myAuthor.getNationality());
+            Authores updateAutor=myAuthoreRepository.save(auxAuthores);
+            return  updateAutor;
+        }catch (Exception e)
+        {
+            System.out.println("Eroare!");
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
+    @RequestMapping(value = "/autor/{authore_id}",method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAutor(@PathVariable(value = "author_id")Long authoreId)
+    {
+        try {
+            Authores myAuthore = myAuthoreRepository.findById(authoreId).get();
+            myAuthoreRepository.delete(myAuthore);
+            return  ResponseEntity.ok().build();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
